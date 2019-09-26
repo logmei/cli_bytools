@@ -1,5 +1,6 @@
 /node_modules
-/dist
+# /dist
 /my-project
+
 
 package-lock.json

@@ -1,7 +1,10 @@
 'use strict';
 
-module.exports = {
-  prompts: [//momander的提示语
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  prompts: [// momander的提示语
   {
     name: 'name',
     type: 'input',
@@ -25,18 +28,19 @@ module.exports = {
   }, {
     name: 'template',
     type: 'list',
-    choices: ['simple_module', 'node_module'],
-    default: 'simple_module',
+    choices: ['simple_vue_module', 'vue_admin_module', 'node_interface_module'],
+    default: 'simple_vue_module',
     message: '请选择模板'
+  }, {
+    name: 'install',
+    type: 'list',
+    choices: ['uninstall_dependence', 'install_dependence'],
+    default: 'uninstall_dependence',
+    message: '是否需要安装依赖'
   }],
-  tpl: { //模板列表
-    simple_module: {
-      url: 'github:logmei/simple_vue_project/#_simple',
-      branch: '_simple'
-    },
-    node_module: {
-      url: 'github:logmei/simple_node_project',
-      branch: 'master'
-    }
+  tpl: { // 模板列表
+    simple_vue_module: 'github:logmei/simple_vue_project/#_template', // #后面代表分支，不设置默认是master
+    vue_admin_module: 'github:PanJiaChen/vue-element-admin/#master', // #后面代表分支，不设置默认是master
+    node_interface_module: 'github:logmei/simple_node_project'
   }
 };

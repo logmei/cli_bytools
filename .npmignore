@@ -1,3 +1,4 @@
 /node_modules
-
+/my-project
+/src
 package-lock.json

@@ -1,11 +1,17 @@
 'use strict';
-const inquirer = require('inquirer');
-const config = require('./common/inquirer-config.js');
-const projectBuild = require('./common/project-build.js');
+import inquirer from 'inquirer';
+import config from './common/inquirer-config.js';
+import projectBuild from './common/project-build.js';
+import ora from 'ora';
 
-module.exports = cmd => {
+const spinner = ora();
+export default cmd => {
   inquirer.prompt(config.prompts)
-    .then(p => projectBuild(p))
-    .catch(e => console.log('项目创建错误', e));
+    .then(p => projectBuild(p, spinner))
+    .catch(e => {
+      spinner.text = '下载失败';
+      spinner.fail();
+      console.log(e);
+    });
 }
 ;

@@ -9,4 +9,11 @@
 * vue_admin_module:https://github.com/PanJiaChen/vue-element-admin
 * node_interface_module:https://github.com/logmei/simple_node_project
   
-### 
+### 安装
+```bash
+  npm i logmei-cli -g 
+```
+### 使用
+```bash
+  logmeiCli create
+```

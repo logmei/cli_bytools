@@ -1,6 +1,6 @@
-const downloadUrl = require('download'); // https://github.com/rndme/download
-const gitClone = require('git-clone');
-const rm = require('rimraf').sync;
+import downloadUrl from 'download'; // https://github.com/rndme/download
+import gitClone from 'git-clone';
+import rm from 'rimraf';
 
 /**
  * Download repo to dest and callback fn
@@ -28,7 +28,7 @@ function download(repo, dest, opts, fn) {
     cloneOptions(opts, options);
     gitClone(url, dest, options, function(err) {
       if (err === undefined) {
-        rm(dest + '/.git');
+        rm.sync(dest + '/.git');
         fn();
       } else {
         fn(err);
@@ -130,4 +130,4 @@ function getUrl(repo, clone) {
   return url;
 }
 
-module.exports = download;
+export default download;

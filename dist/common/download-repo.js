@@ -1,8 +1,22 @@
 'use strict';
 
-var downloadUrl = require('download'); // https://github.com/rndme/download
-var gitClone = require('git-clone');
-var rm = require('rimraf').sync;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _download = require('download');
+
+var _download2 = _interopRequireDefault(_download);
+
+var _gitClone = require('git-clone');
+
+var _gitClone2 = _interopRequireDefault(_gitClone);
+
+var _rimraf = require('rimraf');
+
+var _rimraf2 = _interopRequireDefault(_rimraf);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * Download repo to dest and callback fn
@@ -11,6 +25,7 @@ var rm = require('rimraf').sync;
  * @param {Object} opts
  * @param {Function} fn
  */
+// https://github.com/rndme/download
 function download(repo, dest, opts, fn) {
   if (typeof opts === 'function') {
     fn = opts;
@@ -28,9 +43,9 @@ function download(repo, dest, opts, fn) {
       shallow: repo.checkout === 'master'
     };
     cloneOptions(opts, options);
-    gitClone(url, dest, options, function(err) {
+    (0, _gitClone2.default)(url, dest, options, function (err) {
       if (err === undefined) {
-        rm(dest + '/.git');
+        _rimraf2.default.sync(dest + '/.git');
         fn();
       } else {
         fn(err);
@@ -49,17 +64,17 @@ function download(repo, dest, opts, fn) {
     cloneOptions(opts, _options);
     cloneOptions(opts.headers, _options.header);
 
-    downloadUrl(url, dest, _options).then(function(data) {
+    (0, _download2.default)(url, dest, _options).then(function (data) {
       fn();
-    }).catch(function(err) {
+    }).catch(function (err) {
       fn(err);
     });
   }
 }
 
 function cloneOptions(from, to) {
-  from = from || {};
-  Object.keys(from).forEach(function(v) {
+  if (!from) return;
+  Object.keys(from).forEach(function (v) {
     to[v] = from[v];
   });
 }
@@ -101,7 +116,7 @@ function normalize(repo) {
 function addProtocol(origin, clone) {
   // console.log('addProtocol',origin)
   if (!/^(f|ht)tps?:\/\//i.test(origin)) {
-    if (clone) return 'git@' + origin; else return 'https://' + origin;
+    if (clone) return 'git@' + origin;else return 'https://' + origin;
   }
 }
 
@@ -129,4 +144,4 @@ function getUrl(repo, clone) {
   return url;
 }
 
-module.exports = download;
+exports.default = download;

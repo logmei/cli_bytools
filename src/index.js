@@ -1,6 +1,6 @@
 'use strict';
-const program = require('commander');
-const create = require('./create.js');
+import program from 'commander';
+import create from './create.js';
 program.version(require('../package.json').version);
 
 program

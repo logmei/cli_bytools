@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   prompts: [// momander的提示语
     {
       name: 'name',
@@ -27,9 +27,16 @@ module.exports = {
     {
       name: 'template',
       type: 'list',
-      choices: ['simple_module', 'node_interface_module'],
-      default: 'simple_module',
+      choices: ['simple_vue_module', 'vue_admin_module', 'node_interface_module'],
+      default: 'simple_vue_module',
       message: '请选择模板'
+    },
+    {
+      name: 'install',
+      type: 'list',
+      choices: ['uninstall_dependence', 'install_dependence'],
+      default: 'uninstall_dependence',
+      message: '是否需要安装依赖'
     }
   ],
   tpl: { // 模板列表
