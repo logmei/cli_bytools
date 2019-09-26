@@ -58,6 +58,7 @@ function download(repo, dest, opts, fn) {
 }
 
 function cloneOptions(from, to) {
+  if (!from) return;
   Object.keys(from).forEach(v => {
     to[v] = from[v];
   });

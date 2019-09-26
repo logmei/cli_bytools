@@ -27,19 +27,14 @@ module.exports = {
     {
       name: 'template',
       type: 'list',
-      choices: ['simple_module', 'node_module'],
+      choices: ['simple_module', 'node_interface_module'],
       default: 'simple_module',
       message: '请选择模板'
     }
   ],
   tpl: { // 模板列表
-    simple_module: {
-      url: 'github:logmei/simple_vue_project/#_simple',
-      branch: '_simple'
-    },
-    node_module: {
-      url: 'github:logmei/simple_node_project',
-      branch: 'master'
-    }
+    simple_vue_module: 'github:logmei/simple_vue_project/#_template', // #后面代表分支，不设置默认是master
+    vue_admin_module: 'github:PanJiaChen/vue-element-admin/#master', // #后面代表分支，不设置默认是master
+    node_interface_module: 'github:logmei/simple_node_project'
   }
 };
