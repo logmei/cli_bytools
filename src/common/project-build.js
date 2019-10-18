@@ -5,15 +5,15 @@ import handlebars from 'handlebars';
 import chalk from 'chalk';
 import { exec } from 'child_process';
 import ora from 'ora';
-import Settings from './update-settings.js'
+import Settings from './update-settings.js';
 
-function updateSettings(name){
-  Settings[name].forEach(v => {
-      const fileName = `${name}${v}`;
-      const content = fs.readFileSync(fileName).toString();
-      const result = handlebars.compile(content)(p);
-      fs.writeFileSync(fileName, result);
-  })
+function updateSettings(p) {
+  Settings[p.template].forEach(v => {
+    const fileName = `${p.name}${v}`;
+    const content = fs.readFileSync(fileName).toString();
+    const result = handlebars.compile(content)(p);
+    fs.writeFileSync(fileName, result);
+  });
 }
 
 export default (p, spinner) => {
@@ -30,7 +30,7 @@ export default (p, spinner) => {
       console.log(chalk.green('下载成功'));
       let spinnerInstall = ora('修改配置项....\n').start();
 
-      updateSettings(p.name);
+      updateSettings(p);
       // console.log('\r\n');
       console.log(chalk.green('项目创建完毕'));
       spinnerInstall.succeed();

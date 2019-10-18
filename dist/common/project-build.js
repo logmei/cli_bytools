@@ -30,7 +30,20 @@ var _ora = require('ora');
 
 var _ora2 = _interopRequireDefault(_ora);
 
+var _updateSettings = require('./update-settings.js');
+
+var _updateSettings2 = _interopRequireDefault(_updateSettings);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function updateSettings(p) {
+  _updateSettings2.default[p.template].forEach(function (v) {
+    var fileName = '' + p.name + v;
+    var content = _fs2.default.readFileSync(fileName).toString();
+    var result = _handlebars2.default.compile(content)(p);
+    _fs2.default.writeFileSync(fileName, result);
+  });
+}
 
 exports.default = function (p, spinner) {
   console.log(_chalk2.default.green('开始下载'));
@@ -46,15 +59,12 @@ exports.default = function (p, spinner) {
       console.log(_chalk2.default.green('下载成功'));
       var spinnerInstall = (0, _ora2.default)('修改配置项....\n').start();
 
-      var fileName = p.name + '/package.json';
-      var content = _fs2.default.readFileSync(fileName).toString();
-      var result = _handlebars2.default.compile(content)(p);
-      _fs2.default.writeFileSync(fileName, result);
+      updateSettings(p);
       // console.log('\r\n');
       console.log(_chalk2.default.green('项目创建完毕'));
       spinnerInstall.succeed();
       if (p.install === 'install_dependence') {
-        spinnerInstall = (0, _ora2.default)('开始安装依赖....\n').start();
+        spinnerInstall = (0, _ora2.default)('开始安装依赖....').start();
         (0, _child_process.exec)('cd ' + p.name + ' && npm install', function (error, stdout, stderr) {
           if (error) {
             console.log(_chalk2.default.red('安装依赖失败'));

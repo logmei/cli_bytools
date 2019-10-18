@@ -1,12 +1,12 @@
 {
   "name": "logmei-cli",
-  "version": "0.0.7",
+  "version": "0.1.9",
   "description": "",
   "main": "bin/index.js",
-  "bin":{
-    "logmeiCli":"bin/index.js"
+  "bin": {
+    "logmeiCli": "bin/index.js"
   },
-  "private":false,
+  "private": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d dist",
