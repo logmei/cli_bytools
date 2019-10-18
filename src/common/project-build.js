@@ -5,6 +5,16 @@ import handlebars from 'handlebars';
 import chalk from 'chalk';
 import { exec } from 'child_process';
 import ora from 'ora';
+import Settings from './update-settings.js'
+
+function updateSettings(name){
+  Settings[name].forEach(v => {
+      const fileName = `${name}${v}`;
+      const content = fs.readFileSync(fileName).toString();
+      const result = handlebars.compile(content)(p);
+      fs.writeFileSync(fileName, result);
+  })
+}
 
 export default (p, spinner) => {
   console.log(chalk.green('开始下载'));
@@ -20,10 +30,7 @@ export default (p, spinner) => {
       console.log(chalk.green('下载成功'));
       let spinnerInstall = ora('修改配置项....\n').start();
 
-      const fileName = `${p.name}/package.json`;
-      const content = fs.readFileSync(fileName).toString();
-      const result = handlebars.compile(content)(p);
-      fs.writeFileSync(fileName, result);
+      updateSettings(p.name);
       // console.log('\r\n');
       console.log(chalk.green('项目创建完毕'));
       spinnerInstall.succeed();
